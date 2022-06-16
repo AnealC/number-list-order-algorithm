@@ -1,0 +1,123 @@
+#------------------------------------------------------------------------------------------------
+#  Copyright (c) 2022 by Aaron Neal Crawford
+#------------------------------------------------------------------------------------------------
+#  Purpose of Program:
+#  The program creates a list of numbers based on user input, then presents all numbers greater than
+#  a number entered, less than a number entered, and orders all lists of those numbers backwards and
+#  forwards.
+#=================================================================================================
+# Data Dictionary
+#  Name                     Type          Range         Use
+#  ------                   -----         ----------    -----------------------------------------
+#
+#=================================================================================================
+#  Functions used:
+#  Name                  Inputs           Use
+#  ------                ------------     --------------------------------------------------------
+#  main()                10 numbers, n    Takes user input of both a number, n, and asks for 10 separate
+#                                         numbers from the user, passes that information into
+#                                         display_larger()
+#  display_larger()                       Takes the output of main() finds the numbers greater than
+#                                         and less than the user input and runs it through a series
+#                                         of sorting steps to present the information forward and backward
+#
+#=================================================================================================
+
+#====================================================================================
+# Function name: main()     Author: Aaron Crawford
+# Date Written: May 3, 2022
+#====================================================================================
+# Purpose of Function: Creates a list of 10 numbers based on user input. Then asks for a number
+#                      to compare against list for higher and lower numbers in the list
+#====================================================================================
+# Data Dictionary
+#  Name            Type          Range          Use
+#  ------          -----         ----------     ----------------------------
+# num_list         list          N/A            Initial list for number storage based on user input
+# n                int(var)                     User input for test number
+# user_num         int(var)      inf            Number that is added to list based on input
+#
+#====================================================================================
+def main():
+    num_list = []
+    print('Enter 10 integers')
+    loop = 0
+    while loop != 10:
+        try:
+            user_num = int(input('Enter a number: '))
+            num_list.append(user_num)
+            loop += 1
+            if loop == 10:
+                n = int(input('Enter the number you wish to test if the list elements are greater than: '))
+                display_larger(n, num_list)
+        except IOError:
+            print('Oops! Enter a number!')
+        except ValueError:
+            print('Oops! Enter an integer!')
+
+#====================================================================================
+# Function name: display_larger()     Author: Aaron Crawford
+# Date Written: May 2, 2022
+#====================================================================================
+# Purpose of Function: Takes the parameterd from main() and compares n to the list and
+#                      displays numbers greater than and less than n. Then takes those
+#                      new lists and prints them sorted ascending and descending.
+#====================================================================================
+# Data Dictionary
+#  Name                 Type          Range             Use
+#  ------               -----         ----------        ----------------------------
+# num_list_greater      list          Based on input    Lists numbers greater than n
+# num_list_less         list          Based on input    Lists numbers less than n
+# n                     var(int)      based on input    int variable based on user input
+# num_list              list          based on input    Original list built in main()
+#
+#====================================================================================
+def display_larger(n, num_list):
+    print('Test number: ', n)
+    print('List of numbers:')
+    print(num_list)
+    num_list_greater = []
+    num_list_less = []
+    try:
+        for i in num_list:
+            if i > n:
+                num_list_greater.append(i)
+        print('List of numbers greater than', n)
+        print(num_list_greater)
+    except ValueError:
+        print('Uh oh, something went wrong!')
+    try:
+        for i in num_list:
+            if i < n:
+                num_list_less.append(i)
+        print('List of numbers less than', n)
+        print(num_list_less)
+    except ValueError:
+        print('Uh oh, something went wrong!')
+    try:
+        num_list.sort()
+        num_list_greater.sort()
+        num_list_less.sort()
+        print('The sorted list of numbers is:')
+        print(num_list)
+        print('The sorted list of numbers greater than', n)
+        print(num_list_greater)
+        print('The sorted list of numbers less than', n)
+        print(num_list_less)
+    except ValueError:
+        print('Uh oh, something went wrong!')
+    try:
+        num_list.reverse()
+        num_list_greater.reverse()
+        num_list_less.reverse()
+        print('The reversed list of numbers is:')
+        print(num_list)
+        print('The reversed list of numbers greater than', n)
+        print(num_list_greater)
+        print('The reversed list of numbers less than', n)
+        print(num_list_less)
+    except ValueError:
+        print('Uh oh, something went wrong!')
+
+
+main()
